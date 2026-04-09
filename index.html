@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delirium — Guía para Estudiantes</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal-dark: #0a4a3a;
+    --teal-mid: #0f7a60;
+    --teal-bright: #1db88a;
+    --teal-light: #c3f0e0;
+    --teal-pale: #eafaf4;
+    --navy: #0d1f2d;
+    --navy-soft: #1a3344;
+    --slate: #2d4a5a;
+    --mid: #4a7080;
+    --muted: #7a9aaa;
+    --line: #d0e8e0;
+    --bg: #f4fbf8;
+    --white: #ffffff;
+    --warn: #d85a30;
+    --amber: #ba7517;
+    --amber-light: #faeeda;
+    --red-bg: #fcebeb;
+    --red-text: #a32d2d;
+    --text: #0d1f2d;
+    --text-secondary: #3a5a6a;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 3rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(29,184,138,0.04) 40px,
+      rgba(29,184,138,0.04) 80px
+    );
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .header-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-bright);
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  header h1 span {
+    color: var(--teal-bright);
+  }
+  .header-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 560px;
+    font-weight: 300;
+  }
+  .header-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .badge {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .badge-green { background: rgba(29,184,138,0.15); color: var(--teal-bright); }
+  .badge-blue { background: rgba(55,138,221,0.15); color: #6aaee8; }
+  .badge-amber { background: rgba(186,117,23,0.2); color: #e0a040; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 12px rgba(0,80,60,0.06);
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    background: none;
+    border: none;
+    padding: 14px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover { color: var(--teal-mid); }
+  .nav-btn.active { color: var(--teal-mid); border-bottom-color: var(--teal-mid); }
+
+  /* ── MAIN ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--teal-light);
+  }
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--teal-dark);
+    margin: 1.75rem 0 0.6rem;
+  }
+  p { margin-bottom: 0.9rem; color: var(--text-secondary); }
+  strong { color: var(--text); font-weight: 500; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-teal {
+    background: var(--teal-pale);
+    border-color: var(--teal-light);
+  }
+  .card-amber {
+    background: var(--amber-light);
+    border-color: #f5c47580;
+  }
+  .card-red { background: var(--red-bg); border-color: #f7c1c1; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
+
+  /* ── DSM BOX ── */
+  .dsm-box {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    color: #fff;
+  }
+  .dsm-box h3 { color: var(--teal-bright); margin-top: 0; }
+  .dsm-criterion {
+    display: flex;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    align-items: flex-start;
+  }
+  .dsm-criterion:last-child { border-bottom: none; padding-bottom: 0; }
+  .dsm-letter {
+    min-width: 32px;
+    height: 32px;
+    background: var(--teal-mid);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+  .dsm-text { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.85); }
+  .dsm-text strong { color: #fff; }
+
+  /* ── STATS ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: 1.25rem 0;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--teal-mid);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); line-height: 1.3; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── TAGS ── */
+  ul.tag-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0.75rem 0; }
+  ul.tag-list li {
+    background: var(--teal-pale);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: var(--teal-dark);
+    font-weight: 400;
+  }
+  ul.tag-list.red li { background: var(--red-bg); border-color: #f7c1c1; color: var(--red-text); }
+  ul.tag-list.amber li { background: var(--amber-light); border-color: #f5c47580; color: #6a3800; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: 10px; border: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead { background: var(--navy); color: #fff; }
+  thead th { padding: 10px 14px; font-family: 'Syne', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.05em; text-align: left; }
+  tbody tr:nth-child(even) { background: var(--teal-pale); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  td { padding: 9px 14px; color: var(--text-secondary); vertical-align: top; border-bottom: 1px solid var(--line); }
+  td:first-child { font-weight: 500; color: var(--text); }
+
+  /* ── SUBTYPES ── */
+  .subtype-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+  .subtype-card {
+    border-radius: 12px;
+    padding: 1.4rem;
+    border: 1px solid;
+  }
+  .subtype-hypo { background: #eef6ff; border-color: #b5d4f4; }
+  .subtype-hyper { background: #fcebeb; border-color: #f7c1c1; }
+  .subtype-mixed { background: var(--amber-light); border-color: #f5c47580; }
+  .subtype-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .subtype-hypo .subtype-label { color: #185fa5; }
+  .subtype-hyper .subtype-label { color: var(--red-text); }
+  .subtype-mixed .subtype-label { color: #633806; }
+  .subtype-card ul { list-style: none; font-size: 13px; }
+  .subtype-card ul li { padding: 2px 0; }
+  .subtype-card ul li::before { content: '·  '; font-weight: 700; }
+  .subtype-hypo ul li::before { color: #185fa5; }
+  .subtype-hyper ul li::before { color: var(--red-text); }
+  .subtype-mixed ul li::before { color: #854f0b; }
+
+  /* ── SCREENING TOOLS ── */
+  .tool-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .tool-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .tool-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+  .tool-time { font-size: 12px; background: var(--teal-pale); color: var(--teal-mid); padding: 3px 10px; border-radius: 100px; font-weight: 500; }
+  .tool-rows { font-size: 13.5px; color: var(--text-secondary); }
+  .tool-row { padding: 5px 0; border-bottom: 1px solid var(--line); display: flex; gap: 8px; }
+  .tool-row:last-child { border-bottom: none; }
+  .tool-row-label { color: var(--muted); min-width: 100px; font-size: 12px; padding-top: 2px; }
+
+  /* ── MECHANISM ── */
+  .mech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1.25rem 0; }
+  .mech-item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--teal-mid);
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1rem;
+  }
+  .mech-title { font-weight: 500; font-size: 13px; color: var(--navy); margin-bottom: 3px; }
+  .mech-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  /* ── PREVENTION BUNDLE ── */
+  .bundle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.6rem; margin: 1rem 0; }
+  .bundle-item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.9rem;
+    text-align: center;
+  }
+  .bundle-letter {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--teal-mid);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .bundle-text { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+  /* ── COLOMBIA ── */
+  .co-highlight {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+  }
+  .co-highlight h3 { color: var(--teal-bright); margin-top: 0; }
+  .co-stat { display: inline-block; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--teal-bright); }
+
+  .alert {
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 14px;
+    border-left: 3px solid;
+  }
+  .alert-warn { background: var(--amber-light); border-color: var(--amber); color: #5a3000; }
+  .alert-info { background: var(--teal-pale); border-color: var(--teal-mid); color: var(--teal-dark); }
+  .alert strong { display: block; margin-bottom: 3px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── FOOTER ── */
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); margin-top: 3rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-eyebrow">Psiquiatría de enlace · Geriatría · Cuidado crítico</div>
+    <h1>Delirium<br><span>Guía completa</span><br>para estudiantes</h1>
+    <p class="header-sub">Basado en Wilson et al. (Nature Reviews, 2020), Hshieh et al. (Clin Geriatr Med, 2020), Bowman et al. (Critical Care, 2021), Ormseth et al. (JAMA Network Open, 2023) y Franco et al. (Rev. Colomb. Psiquiatría, 2021). Incluye criterios DSM-5.</p>
+    <div class="header-badges">
+      <span class="badge badge-green">DSM-5</span>
+      <span class="badge badge-blue">Herramientas CAM / 4AT</span>
+      <span class="badge badge-amber">Prevención ABCDEF</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('definicion')">Definición</button>
+    <button class="nav-btn" onclick="showSection('epidemiologia')">Epidemiología</button>
+    <button class="nav-btn" onclick="showSection('factores')">Factores de riesgo</button>
+    <button class="nav-btn" onclick="showSection('fisiopatologia')">Fisiopatología</button>
+    <button class="nav-btn" onclick="showSection('subtipos')">Subtipos motores</button>
+    <button class="nav-btn" onclick="showSection('diagnostico')">Diagnóstico</button>
+    <button class="nav-btn" onclick="showSection('prevencion')">Prevención</button>
+    <button class="nav-btn" onclick="showSection('tratamiento')">Tratamiento</button>
+    <button class="nav-btn" onclick="showSection('desenlaces')">Desenlaces</button>
+    <button class="nav-btn" onclick="showSection('colombia')">Colombia</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════ DEFINICIÓN -->
+<section id="definicion" class="section active">
+  <h2>Definición y criterios diagnósticos</h2>
+
+  <p>El término <strong>delirium</strong> proviene del latín <em>delirare</em>, que significa "salirse del surco". Es un <strong>síndrome neuropsiquiátrico grave</strong> caracterizado por el inicio agudo de déficits en la atención y otros aspectos de la cognición, con curso fluctuante.</p>
+
+  <div class="dsm-box">
+    <h3>Criterios DSM-5 para Delirium</h3>
+    <p style="color:rgba(255,255,255,0.55); font-size:13px; margin-bottom:1rem;">Para el diagnóstico se requieren los criterios A, B, C, D y E.</p>
+
+    <div class="dsm-criterion">
+      <div class="dsm-letter">A</div>
+      <div class="dsm-text"><strong>Alteración de la atención y la conciencia.</strong> Capacidad reducida para dirigir, enfocar, mantener o cambiar la atención; orientación reducida al entorno.</div>
+    </div>
+    <div class="dsm-criterion">
+      <div class="dsm-letter">B</div>
+      <div class="dsm-text"><strong>Inicio agudo con curso fluctuante.</strong> La alteración se desarrolla en un período corto (usualmente horas o pocos días) y tiende a fluctuar en gravedad a lo largo del día.</div>
+    </div>
+    <div class="dsm-criterion">
+      <div class="dsm-letter">C</div>
+      <div class="dsm-text"><strong>Alteración cognitiva adicional.</strong> Déficit de memoria, desorientación, lenguaje alterado, capacidad visuoespacial o percepción (alucinaciones, ilusiones).</div>
+    </div>
+    <div class="dsm-criterion">
+      <div class="dsm-letter">D</div>
+      <div class="dsm-text"><strong>No explicado por un trastorno neurocognitivo preexistente.</strong> Las alteraciones de A y C no ocurren en el contexto de un estado de conciencia gravemente reducida (como el coma).</div>
+    </div>
+    <div class="dsm-criterion">
+      <div class="dsm-letter">E</div>
+      <div class="dsm-text"><strong>Evidencia de causa médica.</strong> La alteración es consecuencia directa de una condición médica, intoxicación o abstinencia de sustancias, exposición a toxinas o causas múltiples.</div>
+    </div>
+  </div>
+
+  <h3>Espectro del delirium</h3>
+  <div class="card-grid">
+    <div class="card card-teal">
+      <strong>Delirium subsindromático</strong>
+      <p style="margin-top:0.5rem; font-size:13px;">Algunos síntomas de delirium presentes pero sin cumplir todos los criterios DSM-5. Casi 2/3 de adultos >65 años hospitalizados en salas médicas pueden tener esta condición.</p>
+    </div>
+    <div class="card">
+      <strong>Delirium pleno</strong>
+      <p style="margin-top:0.5rem; font-size:13px;">Cumple todos los criterios. La mayoría de episodios dura días, pero puede persistir semanas o meses en ~20% de los pacientes.</p>
+    </div>
+    <div class="card card-amber">
+      <strong>Encefalopatía aguda</strong>
+      <p style="margin-top:0.5rem; font-size:13px;">Proceso patobiológico difuso subyacente. Puede manifestarse como delirium o como coma. El delirium es la expresión clínica de la encefalopatía.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>Terminología recomendada (consenso de 10 sociedades internacionales)</strong>
+    Solo usar dos términos: <em>delirium</em> (fenómeno clínico) y <em>encefalopatía aguda</em> (proceso patobiológico cerebral). Evitar: estado confusional agudo, encefalopatía metabólica, síndrome orgánico cerebral.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ EPIDEMIOLOGÍA -->
+<section id="epidemiologia" class="section">
+  <h2>Epidemiología</h2>
+
+  <p>El delirium es la <strong>complicación más frecuente</strong> en pacientes hospitalizados mayores de 65 años. En Estados Unidos afecta a más de 2,6 millones de adultos mayores cada año, con costos totales estimados en más de <strong>$164 mil millones</strong> anuales. Es altamente prevenible y a menudo es la única manifestación de una enfermedad médica grave subyacente.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">23%</div>
+      <div class="stat-label">Medicina interna hospitalaria</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8–17%</div>
+      <div class="stat-label">Urgencias (adultos mayores)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">11–46%</div>
+      <div class="stat-label">Cirugía cardíaca</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">13–50%</div>
+      <div class="stat-label">Cirugía no cardíaca</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">35%</div>
+      <div class="stat-label">Cuidados paliativos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">56%</div>
+      <div class="stat-label">Pacientes con demencia hospitalizados</div>
+    </div>
+  </div>
+
+  <h3>Prevalencia, incidencia y desenlaces por entorno clínico</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Entorno</th><th>Prevalencia</th><th>Incidencia</th><th>Desenlaces clave (RR ajustado)</th></tr></thead>
+      <tbody>
+        <tr><td>Medicina general hospitalaria</td><td>18–35%</td><td>11–14%</td><td>Mortalidad ×1.5–1.6 · Deterioro funcional ×1.5</td></tr>
+        <tr><td>Geriatría intrahospitalaria</td><td>25%</td><td>20–29%</td><td>Caídas ×1.3 · Mortalidad ×1.9 · Institucionalización ×2.5</td></tr>
+        <tr><td>Cirugía cardíaca</td><td>—</td><td>11–46%</td><td>Deterioro cognitivo ×1.7 · Deterioro funcional ×1.9</td></tr>
+        <tr><td>Cirugía ortopédica</td><td>17%</td><td>12–51%</td><td>Demencia/deterioro cognitivo ×6.4–41.2 · Institucionalización ×5.6</td></tr>
+        <tr><td>ACV agudo</td><td>—</td><td>10–27%</td><td>Mortalidad ×2.0 · Estancia prolongada + deterioro funcional ×2.1</td></tr>
+        <tr><td>Demencia preexistente</td><td>18%</td><td>56%</td><td>Deterioro cognitivo ×1.6–3.1 · Institucionalización ×9.3 · Mortalidad ×5.4</td></tr>
+        <tr><td>Urgencias (adultos mayores)</td><td>8–17%</td><td>—</td><td>Mortalidad a 6 meses ×1.7</td></tr>
+        <tr><td>Cuidados paliativos / cáncer</td><td>—</td><td>47%</td><td>—</td></tr>
+        <tr><td>Hogar geriátrico / postacuto</td><td>14%</td><td>20–22%</td><td>Mortalidad ×4.9</td></tr>
+        <tr><td>Comunitario</td><td>1–2%</td><td>—</td><td>La aparición típicamente lleva al paciente a urgencias</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>Subdiagnóstico masivo</strong>
+    El delirium no se detecta en hasta el 60–70% de los casos. El subtipo hipoactivo es el más frecuentemente ignorado, a menudo confundido con depresión o fatiga. La tamización activa con herramientas validadas es indispensable.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ FACTORES DE RIESGO -->
+<section id="factores" class="section">
+  <h2>Factores predisponentes y precipitantes</h2>
+
+  <div class="alert alert-info">
+    <strong>Modelo de vulnerabilidad-estrés</strong>
+    La mayoría de los pacientes con delirium presentan <em>ambos</em> tipos de factores. Un cerebro vulnerable (predisponente) necesita un insulto menos severo para desarrollar delirium. Por ejemplo, una dosis baja de una benzodiacepina puede desencadenar delirium en un paciente con deterioro cognitivo, mientras que un paciente sin comorbilidades puede tolerar múltiples insultos sin desarrollarlo.
+  </div>
+
+  <h3>Factores predisponentes con riesgo relativo estimado</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor predisponente</th><th>Medicina general</th><th>Cirugía</th></tr></thead>
+      <tbody>
+        <tr><td>Demencia</td><td>RR 2.3–4.7</td><td>RR 2.8</td></tr>
+        <tr><td>Deterioro cognitivo</td><td>RR 2.1–2.8</td><td>RR 3.5–4.2</td></tr>
+        <tr><td>Antecedente de delirium</td><td>—</td><td>RR 3.0</td></tr>
+        <tr><td>Discapacidad funcional</td><td>RR 4.0</td><td>RR 2.5–3.5</td></tr>
+        <tr><td>Déficit visual</td><td>RR 2.1–3.5</td><td>RR 1.1–3.0</td></tr>
+        <tr><td>Déficit auditivo</td><td>—</td><td>RR 1.3</td></tr>
+        <tr><td>Comorbilidad / severidad de enfermedad</td><td>RR 1.3–5.6</td><td>RR 4.3</td></tr>
+        <tr><td>Depresión</td><td>RR 3.2</td><td>—</td></tr>
+        <tr><td>Abuso de alcohol</td><td>RR 5.7</td><td>RR 1.4–3.3</td></tr>
+        <tr><td>Edad avanzada (>70–75 años)</td><td>RR 4.0</td><td>RR 3.3–6.6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Factores predisponentes adicionales identificados</h3>
+  <div class="two-col">
+    <div class="card">
+      <strong>Cognitivos / neurológicos</strong>
+      <ul class="tag-list" style="margin-top: 0.6rem;">
+        <li>ACV / AIT previo</li>
+        <li>Bajo nivel educativo</li>
+        <li>Ansiedad / neurotismo</li>
+        <li>Mala calidad de sueño previa</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Sistémicos / funcionales</strong>
+      <ul class="tag-list" style="margin-top: 0.6rem;">
+        <li>Fragilidad</li>
+        <li>Desnutrición</li>
+        <li>Enfermedad cardiovascular</li>
+        <li>Insuficiencia renal crónica</li>
+        <li>EPOC / AOS</li>
+        <li>Tabaquismo</li>
+        <li>Polimedicación</li>
+        <li>Dolor crónico</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Factores precipitantes con riesgo relativo estimado (medicina general)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor precipitante</th><th>RR</th><th>Mecanismo putativo</th></tr></thead>
+      <tbody>
+        <tr><td>Uso de restricción física</td><td>3.2–4.4</td><td>Inmovilización, estrés</td></tr>
+        <tr><td>Medicamentos psicoactivos</td><td>4.5</td><td>Desequilibrio de neurotransmisores</td></tr>
+        <tr><td>Polimedicación</td><td>2.9</td><td>Interacciones, carga anticolinérgica</td></tr>
+        <tr><td>Catéter urinario</td><td>2.4</td><td>Inmovilización, infección</td></tr>
+        <tr><td>Urea sérica elevada</td><td>5.1</td><td>Uremia, disfunción renal</td></tr>
+        <tr><td>Cociente BUN/creatinina elevado</td><td>2.0</td><td>Deshidratación, hipoperfusión</td></tr>
+        <tr><td>Alteraciones de sodio, glucosa o potasio</td><td>—</td><td>Trastorno electrolítico (cirugía: RR 3.4)</td></tr>
+        <tr><td>Cualquier evento iatrogénico</td><td>1.9</td><td>Variable, multifactorial</td></tr>
+        <tr><td>Benzodiacepinas</td><td>—</td><td>Aumento del tono GABAérgico corticotalámico</td></tr>
+        <tr><td>Opioides</td><td>—</td><td>Desequilibrio de neurotransmisores</td></tr>
+        <tr><td>Infección / sepsis</td><td>—</td><td>Neuroinflamación sistémica</td></tr>
+        <tr><td>Privación de sueño</td><td>—</td><td>Disrupción circadiana</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Factores protectores identificados</h3>
+  <p>La <strong>reserva cognitiva</strong> (alto nivel educativo, mayor actividad cognitiva y social frecuente) es el factor protector más robusto. También: movilización precoz, corrección de déficits sensoriales, manejo oportuno del dolor, consulta geriátrica proactiva y entornos hospitalarios con menos perturbaciones nocturnas.</p>
+</section>
+
+<!-- ══════════════════════════════════════════════ FISIOPATOLOGÍA -->
+<section id="fisiopatologia" class="section">
+  <h2>Fisiopatología</h2>
+  <p>El delirium tiene múltiples mecanismos fisiopatológicos que pueden actuar simultáneamente. El cerebro vulnerable combinado con insultos agudos lleva a una <strong>desintegración de redes neuronales</strong> como vía final común.</p>
+
+  <h3>Hipótesis neurobiológicas principales</h3>
+  <div class="mech-grid">
+    <div class="mech-item">
+      <div class="mech-title">Insuficiencia metabólica cerebral</div>
+      <div class="mech-desc">Déficit de O₂ o glucosa → incapacidad de satisfacer demandas energéticas del cerebro. Hipoglucemia y hipoxia son suficientes por sí solas para producir delirium.</div>
+    </div>
+    <div class="mech-item">
+      <div class="mech-title">Neuroinflamación</div>
+      <div class="mech-desc">Microglía "preparada" por neurodegeneración responde de forma exagerada a insultos sistémicos (sepsis, cirugía). IL-1β, TNF, IL-6 alteran la función neuronal.</div>
+    </div>
+    <div class="mech-item">
+      <div class="mech-title">Desequilibrio de neurotransmisores</div>
+      <div class="mech-desc">Déficit colinérgico, exceso dopaminérgico, alteraciones en serotonina, GABA, noradrenalina e histamina según el precipitante.</div>
+    </div>
+    <div class="mech-item">
+      <div class="mech-title">Disfunción vascular cerebral</div>
+      <div class="mech-desc">Alteración del acoplamiento neurovascular, fuga de la BHE, microangiopatía. El flujo sanguíneo cerebral puede reducirse 30–50%.</div>
+    </div>
+    <div class="mech-item">
+      <div class="mech-title">Vulnerabilidad cerebral por edad</div>
+      <div class="mech-desc">Pérdida de conectividad, atrofia, degeneración de vías colinérgicas y noradrenérgicas. Menor umbral para desarrollar delirium con insultos menos graves.</div>
+    </div>
+    <div class="mech-item">
+      <div class="mech-title">Disconectividad de redes</div>
+      <div class="mech-desc">Alteración de la red de modo predeterminado (DMN): inversión de la anticorrelación corteza prefrontal–corteza cingulada posterior. Déficit de atención resultante.</div>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <strong>EEG en el delirium</strong>
+    <p style="margin-top:0.5rem; font-size:13px;">El patrón característico incluye enlentecimiento del EEG: aumento de ondas delta/theta, disminución de frecuencias alfa, aumento de la relación de onda lenta. La EEG cuantitativa puede distinguir pacientes con delirium de no delirantes con sensibilidad del 100% y especificidad del 99%.</p>
+  </div>
+
+  <h3>Eje hipotálamo-hipófisis-suprarrenal</h3>
+  <p>El cortisol elevado se ha asociado con delirium postoperatorio. El estrés activa el eje HPA simultáneamente al sistema nervioso simpático, potenciando la respuesta noradrenérgica. Un antagonista del receptor de CRH bloqueó déficits cognitivos en modelos de trauma torácico.</p>
+</section>
+
+<!-- ══════════════════════════════════════════════ SUBTIPOS MOTORES -->
+<section id="subtipos" class="section">
+  <h2>Subtipos motores (subfenotipificación)</h2>
+
+  <p>La clasificación por subtipo motor es el método más utilizado para subfenotipificar el delirium. Fue descrita inicialmente por Lipowski (1983–1990). Permite orientar el manejo y predecir el pronóstico.</p>
+
+  <div class="subtype-grid">
+    <div class="subtype-card subtype-hypo">
+      <div class="subtype-label">Hipoactivo</div>
+      <ul>
+        <li>Habla lenta, quieta y reducida</li>
+        <li>Apatía, somnolencia</li>
+        <li>Disminución de actividad y alerta</li>
+        <li>Perturbaciones perceptuales</li>
+        <li>Más frecuente (28–56%)</li>
+        <li style="font-weight:500; color:#a32d2d;">⚑ Peor pronóstico</li>
+        <li>Mayor mortalidad, estadía más larga</li>
+        <li>Frecuentemente subdiagnosticado</li>
+      </ul>
+    </div>
+    <div class="subtype-card subtype-hyper">
+      <div class="subtype-label">Hiperactivo</div>
+      <ul>
+        <li>Agitación, inquietud, deambulación</li>
+        <li>Habla aumentada y rápida</li>
+        <li>Alucinaciones frecuentes</li>
+        <li>Mayor alerta y conciencia</li>
+        <li>Menos frecuente (10–47%)</li>
+        <li>Más fácil de detectar</li>
+        <li>Habitualmente tratado con fármacos</li>
+        <li>Mejor pronóstico relativo</li>
+      </ul>
+    </div>
+    <div class="subtype-card subtype-mixed">
+      <div class="subtype-label">Mixto</div>
+      <ul>
+        <li>Combinación transitoria de ambos</li>
+        <li>El subtipo puede variar durante la hospitalización</li>
+        <li>Pronóstico intermedio a malo</li>
+      </ul>
+      <div style="margin-top:1rem; font-size:12px; color:#5a3800; background:rgba(255,255,255,0.5); border-radius:6px; padding:8px;">
+        <strong>Cuarto subtipo:</strong> "normoactivo" — sin alteración psicomotora. El menos reconocido.
+      </div>
+    </div>
+  </div>
+
+  <h3>Otras dimensiones de subfenotipificación emergentes</h3>
+  <div class="card-grid">
+    <div class="card">
+      <strong>Por precipitante</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Hipóxico, séptico, asociado a sedantes, metabólico, no clasificado. El subtipo "no clasificado" se asoció con peores desenlaces cognitivos a largo plazo.</p>
+    </div>
+    <div class="card">
+      <strong>Por mecanismo (endotipo)</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Inflamatorio vs. no inflamatorio: CRP alta, IL-6, IL-8 → vía inflamatoria. IL-10 → vía no inflamatoria. Posibles tratamientos dirigidos futuros.</p>
+    </div>
+    <div class="card">
+      <strong>Por trayectoria de severidad</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">5 trayectorias dinámicas identificadas según severidad y duración. La pertenencia a una trayectoria predice mortalidad a 30 días.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ DIAGNÓSTICO -->
+<section id="diagnostico" class="section">
+  <h2>Diagnóstico y herramientas de tamización</h2>
+
+  <p>El diagnóstico es clínico, basado en los criterios DSM-5. El delirium no tiene un marcador biológico definitivo; los exámenes de laboratorio e imágenes sirven para <strong>identificar las causas subyacentes</strong>, no para confirmar el diagnóstico. Se han desarrollado más de 50 herramientas de evaluación para facilitar el tamizaje sistemático.</p>
+
+  <div class="alert alert-warn">
+    <strong>El delirium sigue siendo subdiagnosticado</strong>
+    Los clínicos no detectan el delirium en hasta el 70% de los pacientes. El subtipo hipoactivo es el más ignorado: su reducción de actividad suele atribuirse erróneamente a bajo estado de ánimo o fatiga. La tamización activa con herramientas validadas es esencial.
+  </div>
+
+  <h3>Evaluación clínica inicial</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Componente</th><th>Acciones clave</th></tr></thead>
+      <tbody>
+        <tr><td>Historia clínica</td><td>Verificar función cognitiva basal (últimas 2 semanas) con familiar / cuidador. Revisar todos los medicamentos (incluyendo sin receta). Evaluar cambios recientes en diagnósticos. Descartar dolor, retención urinaria, estreñimiento.</td></tr>
+        <tr><td>Signos vitales</td><td>Temperatura, saturación de O₂, glucemia capilar, presión ortostática.</td></tr>
+        <tr><td>Examen físico y neurológico</td><td>Buscar infección oculta, deshidratación, signos meníngeos, déficits focales.</td></tr>
+        <tr><td>Laboratorios dirigidos</td><td>Hemograma, uroanálisis, electrolitos, glucosa, función renal/hepática/tiroidea, gases arteriales, ECG. No todos en todos los pacientes: guiarse por la clínica.</td></tr>
+        <tr><td>Neuroimagen (casos seleccionados)</td><td>Indicada con: trauma craneal, síntomas neurológicos focales, sospecha de encefalitis, fiebre de origen desconocido. Cambia el manejo en menos del 10% de los casos de delirium en general.</td></tr>
+        <tr><td>EEG (casos seleccionados)</td><td>Útil para descartar estatus epiléptico no convulsivo y diferenciar de causas psiquiátricas en pacientes difíciles de evaluar.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Herramientas de tamización</h3>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-name">CAM — Confusion Assessment Method</div>
+      <div class="tool-time">5–10 minutos</div>
+    </div>
+    <div class="tool-rows">
+      <div class="tool-row"><span class="tool-row-label">Ámbito</span><span>Sala general, urgencias, adultos mayores, paliativos. Más de 4.500 estudios originales; traducida a más de 20 idiomas.</span></div>
+      <div class="tool-row"><span class="tool-row-label">Criterios</span><span>(A) Inicio agudo/fluctuación + (B) Inatención + (C) Pensamiento desorganizado o (D) Alteración del nivel de conciencia → POSITIVO si A+B+(C o D)</span></div>
+      <div class="tool-row"><span class="tool-row-label">Rendimiento</span><span>Sensibilidad 94–100% · Especificidad 90–95% (estudios de alta calidad con evaluación previa recomendada)</span></div>
+      <div class="tool-row"><span class="tool-row-label">Notas</span><span>La sensibilidad cae considerablemente si se usa sin la evaluación cognitiva previa recomendada. Requiere entrenamiento del evaluador.</span></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-name">3D-CAM — Entrevista diagnóstica de 3 minutos</div>
+      <div class="tool-time">~3 minutos</div>
+    </div>
+    <div class="tool-rows">
+      <div class="tool-row"><span class="tool-row-label">Ámbito</span><span>Pacientes hospitalizados (medicina interna, cirugía, urgencias)</span></div>
+      <div class="tool-row"><span class="tool-row-label">Descripción</span><span>20 ítems en lista de chequeo que evalúan los 4 criterios del CAM. Agiliza la evaluación sin sacrificar validez.</span></div>
+      <div class="tool-row"><span class="tool-row-label">Rendimiento</span><span>Sensibilidad 95% · Especificidad 94% en pacientes hospitalizados</span></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-name">4AT — 4 A's Test</div>
+      <div class="tool-time">2 minutos</div>
+    </div>
+    <div class="tool-rows">
+      <div class="tool-row"><span class="tool-row-label">Ámbito</span><span>Práctica clínica general, incluyendo pacientes con demencia. No requiere entrenamiento especial.</span></div>
+      <div class="tool-row">
+        <span class="tool-row-label">Ítems</span>
+        <span>
+          [1] Nivel de alerta (0 o 4) ·
+          [2] AMT-4: edad, fecha nacimiento, lugar, año (0–2) ·
+          [3] Atención: meses al revés (0–2) ·
+          [4] Cambio agudo/fluctuación (0 o 4) —
+          <strong>Score ≥ 4 → delirium probable</strong>
+        </span>
+      </div>
+      <div class="tool-row"><span class="tool-row-label">Rendimiento</span><span>Sensibilidad y especificidad pooled ~90% y ~84% respectivamente. En un ECA tuvo mayor sensibilidad que el CAM.</span></div>
+      <div class="tool-row"><span class="tool-row-label">Uso clínico</span><span>Mandatoria en todos los pacientes con fractura de cadera en Inglaterra. 95% de tamización lograda (n=60.000 pacientes en 2018).</span></div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-name">FAM-CAM — Family Confusion Assessment Method</div>
+      <div class="tool-time">Variable</div>
+    </div>
+    <div class="tool-rows">
+      <div class="tool-row"><span class="tool-row-label">Ámbito</span><span>Determinación del delirium basada en el reporte de cuidadores informales / familiares</span></div>
+      <div class="tool-row"><span class="tool-row-label">Descripción</span><span>Herramienta validada que permite aprovechar el conocimiento del familiar sobre los cambios en el estado mental del paciente. Útil cuando el paciente no puede comunicarse.</span></div>
+    </div>
+  </div>
+
+  <h3>Herramientas ultrabreves</h3>
+  <div class="two-col">
+    <div class="card">
+      <strong>UB-2 (Ultra Brief 2-Item)</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">"¿Qué día de la semana es hoy?" + "¿Puede decirme los meses del año al revés empezando por diciembre?" Sensibilidad 93%, especificidad 64%. Si falla alguna → evaluar con herramienta definitiva.</p>
+    </div>
+    <div class="card">
+      <strong>Delirium Triage Screen</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Evalúa si el paciente puede deletrear "LUNCH" al revés + nivel de alerta. Alta sensibilidad, especificidad moderada. Diseñado para triaje rápido en urgencias.</p>
+    </div>
+  </div>
+
+  <h3>Herramientas de monitorización continua (enfermería)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <strong>DOS — Delirium Observation Screening Scale</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Administrada por enfermería al final de cada turno. Se correlaciona fuertemente con la Escala de Valoración del Delirium (DRS).</p>
+    </div>
+    <div class="card">
+      <strong>Nu-DESC — Nursing Delirium Screening Scale</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Evaluación continua y sistemática por enfermería en pacientes hospitalizados.</p>
+    </div>
+    <div class="card">
+      <strong>NEECHAM — Neelon & Champagne Scale</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Lista de verificación de síntomas de delirium para estudios liderados por enfermería. Incluye también el nivel de información y comportamiento.</p>
+    </div>
+  </div>
+
+  <h3>Herramientas de severidad</h3>
+  <div class="card-grid">
+    <div class="card">
+      <strong>CAM-S</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Versión corta (0–7) y larga (0–19). Fuerte validez predictiva para estancia, costos, institucionalización y mortalidad.</p>
+    </div>
+    <div class="card">
+      <strong>DRS-R98</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">16 ítems (13 de severidad + 3 diagnósticos). 20–30 minutos. Para evaluación fenomenológica detallada y seguimiento longitudinal.</p>
+    </div>
+    <div class="card">
+      <strong>MDAS</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Memorial Delirium Assessment Scale. 10 ítems (0–3 c/u), rango 0–30. Especialmente útil en cuidados paliativos.</p>
+    </div>
+  </div>
+
+  <h3>Diagnóstico diferencial clave</h3>
+  <div class="two-col">
+    <div class="card card-amber">
+      <strong>Delirium vs. Demencia</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">La clave diferenciadora es el <strong>inicio agudo y la inatención</strong> en el delirium, frente al inicio gradual de la demencia. El delirium sobreimpuesto a demencia (muy frecuente) empeora significativamente el pronóstico: aumenta la estancia, la institucionalización y la mortalidad.</p>
+    </div>
+    <div class="card card-amber">
+      <strong>Delirium vs. Depresión / Psicosis</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">La depresión, manía y esquizofrenia generalmente no se desarrollan abruptamente durante una enfermedad aguda o cirugía. Ante la duda, manejar como delirium hasta obtener más información diagnóstica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ PREVENCIÓN -->
+<section id="prevencion" class="section">
+  <h2>Prevención</h2>
+
+  <p>Prevenir el delirium antes de que se desarrolle es la estrategia más eficaz. Las <strong>intervenciones multicomponentes no farmacológicas</strong> son el estándar de cuidado con mejor evidencia: reducen la incidencia de delirium con un riesgo relativo de 0.53 (IC 95%: 0.41–0.69) y también disminuyen las caídas. Una revisión Cochrane de 39 ensayos (16.092 sujetos) encontró evidencia de calidad moderada que apoya estas intervenciones.</p>
+
+  <h3>HELP — Hospital Elder Life Program</h3>
+  <div class="card card-teal">
+    <p style="font-size:14px;">El programa más difundido a nivel mundial. Aborda sistemáticamente: <strong>orientación cognitiva + higiene del sueño + hidratación + corrección de déficits sensoriales + movilización</strong>. Reducción del 5% en riesgo absoluto de delirium (852 pacientes, ≥70 años). Metaanálisis de 14 estudios confirmó reducción de delirium y caídas. No requiere voluntarios: protocolos equivalentes sin voluntarios son igualmente eficaces.</p>
+  </div>
+
+  <h3>Componentes de las intervenciones multicomponentes</h3>
+  <div class="two-col">
+    <div>
+      <p style="font-size:13px; font-weight:500; color:var(--teal-dark); margin-bottom:0.5rem;">Intervenciones recomendadas</p>
+      <ul class="tag-list">
+        <li>Tamización diaria de delirium</li>
+        <li>Reorientación (calendarios, relojes, láminas)</li>
+        <li>Estimulación cognitiva activa</li>
+        <li>Hidratación y nutrición adecuadas</li>
+        <li>Control oportuno del dolor</li>
+        <li>Movilización precoz (al menos 3×/día)</li>
+        <li>Corrección de déficits visuales y auditivos</li>
+        <li>Higiene del sueño (sin interrupciones nocturnas)</li>
+        <li>Presencia de familiares / acompañantes</li>
+        <li>Orientación ambiental (luz natural, rutina)</li>
+        <li>Retiro temprano de catéteres y dispositivos</li>
+        <li>Consulta geriátrica proactiva</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:13px; font-weight:500; color:var(--red-text); margin-bottom:0.5rem;">Medidas a evitar</p>
+      <ul class="tag-list red">
+        <li>Antipsicóticos profilácticos</li>
+        <li>Benzodiacepinas (salvo abstinencia)</li>
+        <li>Agentes anticolinérgicos</li>
+        <li>Sujeción física</li>
+        <li>Perturbaciones nocturnas innecesarias</li>
+        <li>Polimedicación sin revisión</li>
+        <li>Inmovilización prolongada</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Medicamentos de alto riesgo en adultos mayores (Criterios de Beers 2015)</h3>
+  <p>Las siguientes clases de medicamentos deben usarse con extrema precaución en adultos mayores por su alto riesgo de precipitar delirium:</p>
+  <div class="card card-red">
+    <ul style="list-style:disc; padding-left:1.25rem; font-size:13.5px; color:#6a1a1a; columns: 2; gap: 1.5rem;">
+      <li>Antihistamínicos de primera generación</li>
+      <li>Anticolinérgicos (cualquier clase)</li>
+      <li>Antiespasmódicos / antimuscarínicos</li>
+      <li>Antidepresivos tricíclicos (amitriptilina, nortriptilina, paroxetina)</li>
+      <li>Antipsicóticos (todos)</li>
+      <li>Benzodiacepinas (corta, intermedia y larga acción)</li>
+      <li>Sedantes hipnóticos</li>
+      <li>Antiagentes del Parkinson (ciertos)</li>
+      <li>Relajantes musculares esqueléticos</li>
+      <li>Antagonistas H2 (cimetidina, ranitidina)</li>
+      <li>Corticosteroides sistémicos</li>
+      <li>Meperidina (petidina)</li>
+      <li>Clorpromazina</li>
+    </ul>
+  </div>
+
+  <h3>Intervenciones farmacológicas preventivas</h3>
+  <div class="card card-amber">
+    <p style="font-size:14px;"><strong>No existe ningún fármaco con evidencia sólida para la prevención del delirium.</strong> Revisiones Cochrane y metaanálisis no apoyan el uso de haloperidol, antipsicóticos atípicos, inhibidores de colinesterasa ni melatonina como profilaxis. Una revisión sistemática de 14 ensayos aleatorios concluye que los antipsicóticos no reducen la incidencia de delirium.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ TRATAMIENTO -->
+<section id="tratamiento" class="section">
+  <h2>Tratamiento</h2>
+
+  <div class="alert alert-info">
+    <strong>Principio fundamental</strong>
+    El pilar del manejo es identificar y tratar las causas subyacentes del delirium. El abordaje no farmacológico es la primera línea. Los fármacos tienen un rol muy limitado y no están indicados de rutina para tratar el síndrome.
+  </div>
+
+  <h3>Abordaje multidominio</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Dominio</th><th>Intervenciones</th></tr></thead>
+      <tbody>
+        <tr><td>Ajuste de medicamentos</td><td>Reducir o retirar medicamentos psicoactivos (anticolinérgicos, sedantes, opioides). Sustituir por alternativas menos tóxicas. Usar analgesia no opioide cuando sea posible.</td></tr>
+        <tr><td>Tratar causas médicas subyacentes</td><td>Tratar infecciones, trastornos metabólicos, hipoxia, deshidratación, retención urinaria, estreñimiento, dolor no controlado.</td></tr>
+        <tr><td>Reorientación</td><td>Involucrar a la familia. Corregir déficits sensoriales (lentes, audífonos, intérpretes). Calendarios, relojes, objetos familiares.</td></tr>
+        <tr><td>Mantener movilidad segura</td><td>Evitar sujeción física y alarmas de cama. Deambular al menos 3 veces al día. Rango de movimiento activo. Fomentar autocuidado.</td></tr>
+        <tr><td>Normalizar ciclo sueño-vigilia</td><td>Desalentar la siesta diurna. Favorecer exposición a luz natural. Protocolo de sueño no farmacológico en la noche (ambiente silencioso, iluminación baja).</td></tr>
+        <tr><td>Manejo farmacológico</td><td>Reservar exclusivamente para los casos descritos abajo. Iniciar con dosis bajas y titular según efecto.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>¿Funcionan los antipsicóticos como tratamiento del delirium?</h3>
+  <div class="card card-red">
+    <p style="font-size:14px; color:var(--red-text);"><strong>La evidencia actual no apoya su uso de rutina como tratamiento del síndrome.</strong></p>
+    <ul style="margin-top:0.6rem; font-size:13px; color:#7a2020; list-style:disc; padding-left:1.25rem;">
+      <li>Ensayo MIND-USA (n=566): haloperidol, ziprasidona y placebo → sin diferencia en días sin delirium/coma ni en desenlaces secundarios.</li>
+      <li>Revisión Cochrane 2018 (9 ensayos, 727 pacientes): antipsicóticos sin efecto sobre severidad, resolución de síntomas o mortalidad.</li>
+      <li>Revisión sistemática 2016 (19 estudios): risperidona, olanzapina, quetiapina, ziprasidona y haloperidol → sin reducción en incidencia, duración ni severidad. En 3 estudios, más sujetos requirieron institucionalización con antipsicóticos.</li>
+      <li>Ensayo aleatorizado en paliativos (Agar et al.): risperidona u haloperidol oral → puntajes de delirium más altos y peor supervivencia vs. placebo.</li>
+      <li>Guías de la American Geriatrics Society y American College of Surgeons recomiendan contra el tratamiento farmacológico del delirium hipoactivo.</li>
+    </ul>
+  </div>
+
+  <h3>¿Cuándo sí están indicados los antipsicóticos?</h3>
+  <div class="card" style="border-left: 4px solid var(--teal-mid);">
+    <p style="font-size:14px; margin-bottom:0.75rem;">El consenso de expertos y las guías clínicas (AGS, NICE, guía SIGN) sostienen que los antipsicóticos pueden considerarse <strong>únicamente</strong> en delirium <strong>hiperactivo</strong> cuando:</p>
+    <ul style="list-style:none; font-size:13.5px; color:var(--text-secondary);">
+      <li style="padding:6px 0; border-bottom:1px solid var(--line); display:flex; gap:10px;"><span style="color:var(--teal-mid); font-weight:700; min-width:16px;">1.</span><span>La <strong>agitación pone en riesgo la seguridad del paciente</strong> (riesgo de autolesión, caídas graves, extracción de vías o sondas esenciales).</span></li>
+      <li style="padding:6px 0; border-bottom:1px solid var(--line); display:flex; gap:10px;"><span style="color:var(--teal-mid); font-weight:700; min-width:16px;">2.</span><span>La <strong>conducta pone en riesgo a personas cercanas o al personal de salud</strong> (agresividad física).</span></li>
+      <li style="padding:6px 0; display:flex; gap:10px;"><span style="color:var(--teal-mid); font-weight:700; min-width:16px;">3.</span><span>Los <strong>síntomas impiden el cuidado esencial</strong> (imposibilidad de administrar tratamientos, realizar procedimientos necesarios) y las medidas no farmacológicas han sido insuficientes.</span></li>
+    </ul>
+    <div class="alert alert-warn" style="margin-top:1rem; margin-bottom:0;">
+      <strong>Siempre: dosis bajas, tiempo limitado, revisión frecuente</strong>
+      Haloperidol 0.25–0.5 mg oral o IM es la opción preferida (inicio con dosis mínima). Los antipsicóticos atípicos son igualmente efectivos. Contraindicados en demencia con cuerpos de Lewy. Monitorizar QTc antes y durante el uso. No usar benzodiacepinas salvo en abstinencia a depresores del SNC.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ DESENLACES -->
+<section id="desenlaces" class="section">
+  <h2>Desenlaces y calidad de vida</h2>
+
+  <p>El delirium se asocia de forma independiente con múltiples desenlaces adversos, tanto a corto como a largo plazo. Los costos totales en salud asociados al delirium y sus complicaciones se estiman en más de <strong>$164 mil millones al año</strong> en Estados Unidos.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">×1.5–1.6</div>
+      <div class="stat-label">Mayor mortalidad al año (medicina interna)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">×1.7</div>
+      <div class="stat-label">Mayor mortalidad a 6 meses (urgencias)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">×4.9</div>
+      <div class="stat-label">Mayor mortalidad a 6 meses (postacuto)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">×2.4</div>
+      <div class="stat-label">Riesgo de institucionalización al alta</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">OR 8.7</div>
+      <div class="stat-label">Riesgo de demencia incidente (≥85 años, 10 años)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">20%</div>
+      <div class="stat-label">Persiste con síntomas de delirium a 6 meses</div>
+    </div>
+  </div>
+
+  <h3>Desenlaces a corto plazo</h3>
+  <ul class="tag-list red">
+    <li>Mayor mortalidad intrahospitalaria</li>
+    <li>Caídas y lesiones</li>
+    <li>Neumonía aspirativa</li>
+    <li>Mayor duración de hospitalización</li>
+    <li>Institucionalización</li>
+    <li>Malestar en paciente y cuidadores</li>
+    <li>Mayor costo de atención</li>
+  </ul>
+
+  <h3>Desenlaces a largo plazo</h3>
+  <div class="card-grid">
+    <div class="card">
+      <strong>Deterioro cognitivo</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Factor de riesgo independiente para demencia incidente. Mayor duración del delirium (no la exposición a sedantes) se asocia con mayor deterioro cognitivo. En cirugía cardíaca, 3 días de delirium → mayor declive cognitivo y recuperación más lenta en 12 meses.</p>
+    </div>
+    <div class="card">
+      <strong>Declive funcional</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">La función física está significativamente más deteriorada al alta. Un estudio demostró deterioro clínicamente significativo de la recuperación funcional hasta 18 meses después del episodio.</p>
+    </div>
+    <div class="card">
+      <strong>Salud mental</strong>
+      <p style="font-size:13px; margin-top:0.4rem;">Riesgo aumentado de depresión, ansiedad y TEPT. La disfunción ejecutiva posterior se correlaciona con depresión y peor calidad de vida mental.</p>
+    </div>
+  </div>
+
+  <h3>Delirium sobreimpuesto a demencia</h3>
+  <div class="card card-amber">
+    <p style="font-size:14px;">En pacientes con demencia preexistente, el delirium es especialmente frecuente (incidencia 56%) y tiene consecuencias particularmente graves: deterioro cognitivo acelerado ×1.6–3.1, institucionalización ×9.3, mortalidad ×5.4. La recuperación funcional también es más lenta. El delirium sobreimpuesto a demencia aumenta la estancia hospitalaria, las tasas de reingreso y la mortalidad de forma independiente.</p>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>¿El delirium lesiona el cerebro o es señal de lesión ya ocurrida?</strong>
+    Estudios de neuroimagen muestran anomalías estructurales en el esplenio del cuerpo calloso, tálamo y lóbulo temporal derecho. Técnicas avanzadas revelan cambios microestructurales en estructuras límbicas y de memoria que predisponen al delirium. Se debate si el delirium en sí causa nueva lesión cerebral o simplemente la señala.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ COLOMBIA -->
+<section id="colombia" class="section">
+  <h2>Perspectiva colombiana</h2>
+  <p style="color:var(--muted); font-size:13px; margin-bottom:1.5rem;">Basado en Franco et al. (2021). Encuesta a 101 psiquiatras y residentes de psiquiatría en Colombia sobre prácticas preventivas y terapéuticas del delirium (ACP, 2018–2019).</p>
+
+  <div class="co-highlight">
+    <h3>Perfil de la muestra</h3>
+    <p>101 clínicos respondieron (64 psiquiatras, 37 residentes). Participaron profesionales de Bogotá, Medellín, Cali, Manizales, Barranquilla y otras ciudades. 24 eran psiquiatras de enlace. Tiempo promedio de respuesta: 9 min 24 seg.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 1rem;">
+      <div style="text-align:center;"><div class="co-stat">70%+</div><div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">Realizan medidas no farmacológicas preventivas individualmente</div></div>
+      <div style="text-align:center;"><div class="co-stat">1 de 10</div><div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">Participa en programa institucional multicomponente</div></div>
+      <div style="text-align:center;"><div class="co-stat">&lt;20%</div><div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">Prescribe fármacos profilácticos</div></div>
+      <div style="text-align:center;"><div class="co-stat">17.8%</div><div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">No usa fármacos en ningún tipo de delirium</div></div>
+    </div>
+  </div>
+
+  <h3>Tratamiento farmacológico según subtipo</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Subtipo motor</th><th>% que medica</th><th>Primera opción más frecuente</th><th>Segunda opción</th></tr></thead>
+      <tbody>
+        <tr><td>Hiperactivo</td><td>81.2%</td><td>Haloperidol (71.3%)</td><td>Quetiapina (50.5%)</td></tr>
+        <tr><td>Mixto</td><td>71.3%</td><td>Haloperidol (59.4%)</td><td>Quetiapina (44.5%)</td></tr>
+        <tr><td>Hipoactivo</td><td>31.7%</td><td>Haloperidol (31.7%)</td><td>Sin 2ª opción definida (20.8%)</td></tr>
+        <tr><td>Normoactivo</td><td>20.8%</td><td>Sin 1ª opción definida (23.8%)</td><td>Quetiapina (17.8%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Rangos de dosis usados (más frecuentes)</h3>
+  <div class="two-col">
+    <div class="card">
+      <strong>Haloperidol:</strong> 0.25 – 5 mg/día (46.5%). Vía IV usada por 44.5%.
+    </div>
+    <div class="card">
+      <strong>Quetiapina:</strong> 6.25–50 mg/día (17.8%) o 6.25–100 mg/día (16.8%).
+    </div>
+  </div>
+
+  <h3>Otras opciones terapéuticas frecuentes</h3>
+  <ul class="tag-list">
+    <li>Dexmedetomidina (45.5%)</li>
+    <li>Valproato (40.6%)</li>
+    <li>Melatonina (24.7%)</li>
+    <li>Psicoestimulantes (16.8%)</li>
+    <li>Ondansetrón (10.9%)</li>
+  </ul>
+
+  <div class="card card-amber">
+    <strong>Brecha institucional detectada</strong>
+    <p style="font-size:13px; margin-top:0.5rem;">Aunque la mayoría de profesionales realiza medidas preventivas y terapéuticas de forma individual, <strong>ninguno reportó un sistema estructurado (unidades o equipos específicos de delirium)</strong>. Las instituciones colombianas necesitan comprometerse institucionalmente con la prevención del delirium, cuya prevalencia y consecuencias son indicadores de calidad asistencial.</p>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>Concordancia con expertos internacionales</strong>
+    Las prácticas de los encuestados colombianos coinciden con las de expertos europeos y norteamericanos. El haloperidol como primera opción coincide con las guías de la APA (1999/2004) y la guía NICE 2019.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Fuentes: Wilson et al. <em>Nature Rev. Dis. Primers</em> 2020 · Hshieh, Inouye & Oh. <em>Clin Geriatr Med</em> 2020 · Bowman et al. <em>Critical Care</em> 2021 · Ormseth et al. <em>JAMA Network Open</em> 2023 · Franco et al. <em>Rev. Colomb. Psiquiatría</em> 2021</p>
+  <p style="margin-top:4px;">Material educativo para estudiantes. No reemplaza el juicio clínico.</p>
+</footer>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btns = document.querySelectorAll('.nav-btn');
+  const labels = ['definicion','epidemiologia','factores','fisiopatologia','subtipos','diagnostico','prevencion','tratamiento','desenlaces','colombia'];
+  const idx = labels.indexOf(id);
+  if(idx >= 0) btns[idx].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
